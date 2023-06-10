@@ -6,12 +6,10 @@ import mongoose from "mongoose";
 import products from "./product.js";
 
 const app = express();
-const env = require.env;
 
 // require("dotenv").config();
 
-import dotenv from "dotenv";
-dotenv.config();
+import * as env from "dotenv";
 env.config();
 
 app.use(json());
