@@ -1,6 +1,9 @@
 import express, { json, request } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+// const register = require("./routes/register.js");
+import register from "./routes/register.js";
+import login from "./routes/login.js";
 // import "../Backend/config.js";
 
 import products from "./product.js";
@@ -10,10 +13,14 @@ const app = express();
 // require("dotenv").config();
 
 import * as env from "dotenv";
+import required from "joi";
 env.config();
 
 app.use(json());
 app.use(cors());
+
+app.use("/api/register", register);
+app.use("/api/login", login);
 
 app.get("/", (req, res) => {
   res.send("Welcome to VICKY'S SHOP API...");
