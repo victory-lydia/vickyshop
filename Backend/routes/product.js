@@ -1,8 +1,12 @@
-import express from "express";
+import express, { json, urlencoded } from "express";
 import cloudinary from "../utils/cloudinary.js";
 import Products from "../models/products.js";
 
 const router = express.Router();
+const app = express();
+
+app.use(json({ limit: "50mb" }));
+app.use(urlencoded({ extended: true, limit: "50mb" }));
 
 // CREATE
 
@@ -25,7 +29,7 @@ router.post("/", async (req, res) => {
 
         const savedProduct = await product.save();
 
-        req.statusCode(200).send(savedProduct);
+        res.statusCode(200).send(savedProduct);
       }
     }
   } catch (error) {
