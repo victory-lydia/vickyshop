@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 // const register = require("./routes/register.js");
 import register from "./routes/register.js";
 import login from "./routes/login.js";
+import productRoute from "./routes/product.js";
 // import "../Backend/config.js";
 
 import products from "./product.js";
@@ -21,6 +22,7 @@ app.use(cors());
 
 app.use("/api/register", register);
 app.use("/api/login", login);
+app.use("/api/product", productRoute);
 
 app.get("/", (req, res) => {
   res.send("Welcome to VICKY'S SHOP API...");
