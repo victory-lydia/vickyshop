@@ -1,13 +1,11 @@
 import express, { json, urlencoded } from "express";
 import cloudinary from "../utils/cloudinary.js";
 import Products from "../models/products.js";
-import bodyParser from "body-parser";
+import cors from "cors";
+import multer from "multer";
 
 const router = express.Router();
 const app = express();
-
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 // CREATE
 

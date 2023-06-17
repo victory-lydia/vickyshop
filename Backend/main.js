@@ -1,4 +1,6 @@
 import express, { json, request } from "express";
+import bodyParser from "body-parser";
+
 import cors from "cors";
 import mongoose from "mongoose";
 // const register = require("./routes/register.js");
@@ -16,6 +18,9 @@ const app = express();
 import * as env from "dotenv";
 import required from "joi";
 env.config();
+
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
 app.use(json());
 app.use(cors());
