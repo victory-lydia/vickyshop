@@ -3,19 +3,20 @@ import cloudinary from "../utils/cloudinary.js";
 import Products from "../models/products.js";
 import cors from "cors";
 import multer from "multer";
+import { isAdmin } from "../middleware/auth.js";
 
 const router = express.Router();
 const app = express();
 
 // CREATE
 
-router.post("/", async (req, res) => {
+router.post("/", isAdmin, async (req, res) => {
   const { name, desc, price, image } = req.body;
 
   try {
     if (image) {
       const uploadRes = await cloudinary.uploader.upload(image, {
-        upload_preset: "vickyshop",
+        upload_preset: "onlineshop",
       });
 
       if (uploadRes) {
@@ -23,12 +24,12 @@ router.post("/", async (req, res) => {
           name,
           desc,
           price,
-          image: uploadRes,
+          image,
         });
 
         const savedProduct = await product.save();
 
-        res.statusCode(200).send(savedProduct);
+        res.status(200).send(savedProduct);
       }
     }
   } catch (error) {
